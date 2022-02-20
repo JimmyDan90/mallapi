@@ -1,0 +1,13 @@
+# 启动端口号
+server:
+  post: 8000
+
+# MySql数据源配置
+mysql:
+  username: root
+  password: 19901112
+  url: tcp(localhost:3306)/mall?charset=utf8&parseTime=True&loc=Local
+
+#jwt配置
+jwt:
+  signingKey: z3d6k8v0n3w7m9sa1fd0u09h
