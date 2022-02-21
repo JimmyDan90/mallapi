@@ -10,21 +10,19 @@ var SigningKey = []byte(global.Config.Jwt.SigningKey)
 
 type Claims struct {
 	Username string `json:"username"`
-	Password string `json:"password"`
-	jwt.Claims
+	jwt.StandardClaims
 }
 
 // 生成Token
-func GenerateToken(username, password string) (string, error) {
+func GenerateToken(username string) (string, error) {
 	claims := Claims{
 		username,
-		password,
 		jwt.StandardClaims{
 			ExpiresAt: time.Now().Unix() + 60 * 60,
 			Issuer: username,
 		},
 	}
-	token := jwt.NewWithClaims(jwt.SigningMethodES256, claims)
+	token := jwt.NewWithClaims(jwt.SigningMethodHS256, claims)
 	return token.SignedString(SigningKey)
 }
 

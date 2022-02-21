@@ -32,7 +32,7 @@ func WebUserLogin(c *gin.Context) {
 	// 生成token
 	uid := user.Login(param)
 	if uid > 0 {
-		token, _ := common.GenerateToken(param.Username, param.Password)
+		token, _ := common.GenerateToken(param.Username)
 		userInfo := models.WebUserInfo{
 			Uid: uid,
 			Token: token,
