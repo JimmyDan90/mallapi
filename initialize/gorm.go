@@ -9,7 +9,7 @@ import (
 	"time"
 )
 
-//Mysql 配置
+// Mysql 配置
 func Mysql() {
 	m := global.Config.Mysql
 	var dsn = fmt.Sprintf("%s:%s@%s", m.Username, m.Password, m.Url)

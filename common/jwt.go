@@ -1,7 +1,7 @@
 package common
 
 import (
-	"github.com/golang-jwt/jwt"
+	jwt "github.com/dgrijalva/jwt-go"
 	"mallapi/global"
 	"time"
 )
@@ -13,12 +13,14 @@ type Claims struct {
 	jwt.StandardClaims
 }
 
-// 生成Token
+// GenerateToken 生成Token
 func GenerateToken(username string) (string, error) {
+	nowTime := time.Now()
+	expireTime := nowTime.Add(3 * time.Hour)
 	claims := Claims{
 		username,
 		jwt.StandardClaims{
-			ExpiresAt: time.Now().Unix() + 60 * 60,
+			ExpiresAt: expireTime.Unix(),
 			Issuer: username,
 		},
 	}
@@ -26,12 +28,18 @@ func GenerateToken(username string) (string, error) {
 	return token.SignedString(SigningKey)
 }
 
-// 验证Token
-func VerifyToken(tokenString string) error {
-	_, err := jwt.ParseWithClaims(tokenString, &Claims{}, func(token *jwt.Token) (interface{}, error) {
+// VerifyToken 验证Token
+func VerifyToken(tokenString string) (*Claims, error) {
+	tokenClaims, err := jwt.ParseWithClaims(tokenString, &Claims{}, func(token *jwt.Token) (interface{}, error) {
 		return SigningKey, nil
 	})
-	return err
+	if tokenClaims != nil {
+		if claims, ok := tokenClaims.Claims.(*Claims); ok && tokenClaims.Valid {
+			return claims, nil
+		}
+	}
+
+	return nil, err
 }
 
 
