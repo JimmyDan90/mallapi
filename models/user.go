@@ -1,6 +1,6 @@
 package models
 
-// 数据库，用户数据映射模型
+// User 数据库，用户数据映射模型
 type User struct {
 	Id uint64 `gorm:"primaryKey"`
 	Username string `gorm:"username"`
@@ -9,13 +9,13 @@ type User struct {
 	Status uint `gorm:"status"`
 }
 
-// 后台管理前端，用户登录参数模型
+// WebLoginParam 后台管理前端，用户登录参数模型
 type WebLoginParam struct {
-	Username string `json:"username"`
-	Password string `json:"password"`
-	Phone string `json:"phone"`
-	CaptchaId string `gorm:"captchaId"`
-	CaptchaValue string `gorm:"captchaValue"`
+	Username string `json:"username"` // 用户名称
+	Password string `json:"password"` // 登录密码
+	Phone string `json:"phone"` // 手机号
+	CaptchaId string `gorm:"captchaId"` // 验证码接口返回的字符串
+	CaptchaValue string `gorm:"captchaValue"` // 验证码
 }
 
 

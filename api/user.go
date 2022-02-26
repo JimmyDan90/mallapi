@@ -10,14 +10,21 @@ import (
 
 var user service.WebUserService
 
-// 后台管理系统，获取验证码
+// WebGetCaptcha 后台管理系统，获取验证码
 func WebGetCaptcha(c *gin.Context) {
 	id, b64s, _ := common.GenerateCaptcha()
 	data := map[string]interface{}{"captchaId": id, "captchaImg": b64s}
 	response.Success("操作成功", data, c)
 }
 
-// 后台管理系统，用户登录
+// WebUserLogin web后台系统登录接口
+// @Summary web后台系统登录接口
+// @Description 通过token校验通过后才可以登录
+// @Accept application/json
+// @Produce application/json
+// @Param object body models.WebLoginParam true "用户登录参数"
+// @Success 200 {object} models.WebUserInfo
+// @Router /login [post]
 func WebUserLogin(c *gin.Context) {
 	var param models.WebLoginParam
 	if err := c.ShouldBind(&param); err != nil {
@@ -43,7 +50,7 @@ func WebUserLogin(c *gin.Context) {
 	response.Failed("用户名或密码错误", c)
 }
 
-// 后台管理系统，用户注册
+// WebUserSignUp 后台管理系统，用户注册
 func WebUserSignUp(c *gin.Context) {
 	var param models.WebLoginParam
 	if err := c.ShouldBind(&param); err != nil {

@@ -10,6 +10,13 @@ import (
 var webCategory service.WebCategoryService
 
 // WebCreateCategory 后台系统创建类目
+// @Summary web后台系统创建类目接口
+// @Description 需要传token
+// @Accept application/json
+// @Produce application/json
+// @Param object body models.WebCategoryCreateParam true "类目创建参数"
+// @Success 200 {object} string "{"message": "创建成功", count, c}"
+// @Router /category/create [post]
 func WebCreateCategory(c *gin.Context)  {
 	var param models.WebCategoryCreateParam
 	if err := c.ShouldBind(&param); err != nil {

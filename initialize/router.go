@@ -3,7 +3,10 @@ package initialize
 import (
 	"fmt"
 	"github.com/gin-gonic/gin"
+	swaggerFiles "github.com/swaggo/files"
+	ginSwagger "github.com/swaggo/gin-swagger"
 	"mallapi/api"
+	_ "mallapi/docs"
 	"mallapi/global"
 	"mallapi/middleware"
 )
@@ -13,6 +16,10 @@ func Router() {
 
 	// 静态资源请求映射
 	engine.Static("/image", global.Config.Upload.SavePath)
+
+	// swagger
+	engine.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
+
 	// 后台管理员前端接口
 	web := engine.Group("/web/api/v1")
 	{

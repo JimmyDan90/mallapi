@@ -1,0 +1,102 @@
+basePath: web/api/v1
+definitions:
+  models.WebCategoryCreateParam:
+    properties:
+      level:
+        enum:
+        - 1
+        - 2
+        - 3
+        type: integer
+      name:
+        type: string
+      parentId:
+        type: integer
+      sort:
+        type: integer
+    required:
+    - level
+    - name
+    - parentId
+    - sort
+    type: object
+  models.WebLoginParam:
+    properties:
+      captchaId:
+        description: 验证码接口返回的字符串
+        type: string
+      captchaValue:
+        description: 验证码
+        type: string
+      password:
+        description: 登录密码
+        type: string
+      phone:
+        description: 手机号
+        type: string
+      username:
+        description: 用户名称
+        type: string
+    type: object
+  models.WebUserInfo:
+    properties:
+      token:
+        type: string
+      uid:
+        type: integer
+    type: object
+host: "8000"
+info:
+  contact:
+    email: tangzhiming90@gmail.com
+    name: Jimmy
+    url: http://www.swagger.io/support
+  description: gin restful
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  termsOfService: http://swagger.io/terms/
+  title: 商城系统后台接口文档
+  version: "1.0"
+paths:
+  /category/create:
+    post:
+      consumes:
+      - application/json
+      description: 需要传token
+      parameters:
+      - description: 类目创建参数
+        in: body
+        name: object
+        required: true
+        schema:
+          $ref: '#/definitions/models.WebCategoryCreateParam'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: '{"message": "创建成功", count, c}'
+          schema:
+            type: string
+      summary: web后台系统创建类目接口
+  /login:
+    post:
+      consumes:
+      - application/json
+      description: 通过token校验通过后才可以登录
+      parameters:
+      - description: 用户登录参数
+        in: body
+        name: object
+        required: true
+        schema:
+          $ref: '#/definitions/models.WebLoginParam'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.WebUserInfo'
+      summary: web后台系统登录接口
+swagger: "2.0"
