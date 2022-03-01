@@ -36,6 +36,14 @@ func Router() {
 		web.PUT("/category/update", api.WebUpdateCategory)
 		web.GET("/category/list", api.WebGetCategoryList)
 		web.GET("/category/option", api.WebGetCategoryOption)
+
+		// 商品管理API
+		web.POST("/product/create", api.WebCreateProduct)
+		web.DELETE("/product/delete", api.WebDeleteProduct)
+		web.PUT("/product/update", api.WebUpdateProduct)
+		web.PUT("/product/status/update", api.WebUpdateProductStatus)
+		web.GET("/product/info", api.WebGetProductInfo)
+		web.GET("/product/list", api.WebGetProductList)
 	}
 	// 启动、监听接口
 	post := fmt.Sprintf(":%s", global.Config.Server.Post)
