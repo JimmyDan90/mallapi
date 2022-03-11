@@ -6,7 +6,7 @@ import (
 	"mallapi/global"
 )
 
-// 加载配置文件
+// LoadConfig 加载配置文件
 func LoadConfig()  {
 	viper.AddConfigPath("./")
 	viper.SetConfigName("config")

@@ -11,3 +11,10 @@ mysql:
 #jwt配置
 jwt:
   signingKey: z3d6k8v0n3w7m9sa1fd0u09h
+
+#qiniuStorage 文件存储配置
+qiniuStorage:
+  accessKey: AcwY7oOEL3_6wR8i5nHmgyyjC_S8pvQSYv6j88Qi
+  secretKey: 9qpjDZacCJ-G2Hr1T7UzcUkEjR5xV5KVjPNshRy-
+  bucket: rickdan
+  qiniuServer: r8kfxf9dj.hn-bkt.clouddn.com/

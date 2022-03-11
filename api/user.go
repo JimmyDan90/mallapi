@@ -44,7 +44,7 @@ func WebUserLogin(c *gin.Context) {
 			Uid: uid,
 			Token: token,
 		}
-		response.Success("登录成功", userInfo, c)
+		response.Success("登录完成", userInfo, c)
 		return
 	}
 	response.Failed("用户名或密码错误", c)

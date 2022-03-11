@@ -13,10 +13,6 @@ import (
 
 func Router() {
 	engine := gin.Default()
-
-	// 静态资源请求映射
-	engine.Static("/image", global.Config.Upload.SavePath)
-
 	// swagger
 	engine.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
 
@@ -29,6 +25,9 @@ func Router() {
 		web.POST("/login", api.WebUserLogin)
 		// 开启JWT认证，以下接口需要认证成功才能访问
 		web.Use(middleware.JwtAuth())
+
+		// 文件上传API
+		web.POST("/upload", api.WebFileUpload)
 
 		// 类目管理API
 		web.POST("/category/create", api.WebCreateCategory)
